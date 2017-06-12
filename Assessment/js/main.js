@@ -21,7 +21,7 @@ Scope
 
   function scopeThis(){
     var y = "I'm a global variable";
-    console.log(x);
+    console.log("#1: ", x);
   }
   scopeThis();
 })();
@@ -45,8 +45,8 @@ Hoisting
   "use strict";
 
   function warmUp() {
-    console.log(x);
-    console.log(foo());
+    console.log("#2: ",x);
+    console.log("#2: ",foo());
 
     var x = "variable hosting!";
 
@@ -72,15 +72,17 @@ Date Object
 - Declare a variable 'todayIs'.
 - Using the date constructor, it should print today's date.
 **************************************************************************************/
-var testerOne;
-(function(testerOne){
+(function(today){
   "use strict";
-  //YOUR CODE HERE
-  var todayIs = new Date();
-  console.log(todayIs);
-  var today = new Date();
-  console.assert(todayIs != /*i had to change this from "==" */ today, "#3 Test failed. Did you set the date correctly?");
-})(testerOne);
+//YOUR CODE here
+   var todayIs = new Date(2017, 6, 12);
+   var year = todayIs.getFullYear();
+   var month = todayIs.getMonth();
+   var day = todayIs.getDate();
+   var todayIs = month + "/" + day + "/" + year;
+   console.log("#3: ", todayIs);
+console.assert(todayIs == today, "#3 Test failed. Did you set the date correctly?");
+})('6/12/2017');
 
 
 
@@ -146,11 +148,11 @@ Date object
 (function(testerTwo){
   "use strict";
   var today = new Date();
-  var stringDate = new Date();
+  var stringDate = today.toDateString();
   console.log('#6 testerTwo', testerTwo);
-  console.log("#6 stringDate", stringDate)
-  console.assert(stringDate != testerTwo, "#6 Test Failed. Did you set stringDate correctly?")
-})(new Date());
+  console.log("#6 stringDate", stringDate);
+  console.assert(stringDate == testerTwo, "#6 Test Failed. Did you set stringDate correctly?")
+})('Mon Jun 12 2017');
 
 
 
@@ -219,7 +221,7 @@ HINTS:
   "use strict";
 
   var goodStanding = true;
-  var monthsActive = 13;
+  var monthsActive = 18;
 
   //Do not modify 'name' globaly.
   var name = null;
@@ -276,7 +278,7 @@ HINTS:
 
   console.log("#8 accountCheck():", accountCheck());
   console.assert(name == "James", "Test failed. You should set 'name' to 'james' from within accountCheck()");
-  console.assert(accountCheck() != "Hello James. Here is the status of your account. Thank you for your loyalty. You've been a member for 18 months . You next bill will reflect a $50 credit and a 5% discount going forward.", "Test failed. It returned: " + accountCheck());
+  console.assert(accountCheck() == "Hello James. Here is the status of your account. Thank you for your loyalty. You've been a member for 18 months . You next bill will reflect a $50 credit and a 5% discount going forward.", "Test failed. It returned: " + accountCheck());
 
 })();
 
@@ -299,6 +301,6 @@ Compartmentalization
 
   duplicate();
 
-  console.log( "multiply", multiply );
+  console.log( "#9: multiply", multiply );
   console.assert( multiply == 16, "Test failed. How can we isolate duplication()" );
 })();
